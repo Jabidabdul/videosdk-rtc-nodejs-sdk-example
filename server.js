@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 //
 app.get("/get-token", (req, res) => {
   const API_KEY = process.env.VIDEOSDK_API_KEY;
-  const SECRET_KEY = process.env.VIDEOSDK_SECRET_KEY;
+  const secretOrPrivateKey = process.env.VIDEOSDK_SECRET_KEY;
 
   const options = { expiresIn: "10m", algorithm: "HS256" };
 
@@ -31,7 +31,7 @@ app.get("/get-token", (req, res) => {
     permissions: ["allow_join", "allow_mod"], // also accepts "ask_join"
   };
 
-  const token = jwt.sign(payload, SECRET_KEY, options);
+  const token = jwt.sign(payload, secretOrPrivateKey, options);
   res.json({ token });
 });
 
